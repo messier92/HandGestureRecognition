@@ -170,8 +170,6 @@ while(1):
                     solidity_image = cv2.circle(copy_hull_img, (cX, cY), radius, 255, 1)
 
                     if (len(hull_list) >=2):
-                        keyboard.press('w')
-
                         # you can use areas_contours_list to determine if the hand is open or closed 
                         #print(areas_contours_list)
 
@@ -193,9 +191,7 @@ while(1):
                             solidity_image = cv2.putText(copy_hull_img,hull2textstring, (int(hull_list[1][0][0][0]),int(hull_list[1][0][0][1])), cv2.FONT_HERSHEY_SIMPLEX, 1, (100,80,255), 3, cv2.LINE_AA)
 
                             if ((hull_list[0][0][0][0]) < (hull_list[1][0][0][0])):
-                                send_data = "Turn right!"
-                                #keyboard.release('a')
-                                #keyboard.press('d')
+                                send_data = "Right!"
                                 solidity_image = cv2.putText(copy_hull_img,"Right!", (300,80), cv2.FONT_HERSHEY_SIMPLEX, 1, (100,80,255), 6, cv2.LINE_AA)
                                 try:
                                     sock.sendto(send_data.encode(), (UDP_IP, UDP_PORT_Unity))
@@ -204,9 +200,7 @@ while(1):
                                 except socket.error:
                                     print("Error!")
                             else:
-                                send_data = "Turn left!"
-                                #keyboard.release('d')
-                                #keyboard.press('a')
+                                send_data = "Left!"
                                 solidity_image = cv2.putText(copy_hull_img,"Left!", (300,80), cv2.FONT_HERSHEY_SIMPLEX, 1, (100,80,255), 6, cv2.LINE_AA)
                                 try:
                                     sock.sendto(send_data.encode(), (UDP_IP, UDP_PORT_Unity))
