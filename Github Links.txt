@@ -1,0 +1,20 @@
+Experiments with background segmentation algorithms - https://github.com/VladX/bgs
+Machine Learning based Solutions for Common Computer Vision Problems - https://github.com/pransen/ComputerVisionAlgorithms
+
+BG Modeling Steps:
+
+Background initialization: The first aim to build a background model is to fix number of frames. This model can be designed by various ways (Guassian, fuzzy etc.).
+Foreground detection: In the next frames, a comparison is processed between the current frame and the background model. This subtraction leads to the computation of the foreground of the scene.
+Background maintenance: During this detection process, images are also analyzed in order to update the background model learned at the initialization step, with respect to a learning rate. An object not moving during long time should be integrated in the background for example.
+
+BACKGROUND SUBTRACTION - 2 METHODS:
+Adaptive BG Learning: In a simple way, this can be done by setting manually a static image that represents the background, and having no moving object
+For each video frame, compute the absolute difference between the current frame and the static image.
+If absolute difference exceeds threshold, frame is regarded as background, otherwise foreground.
+
+Gaussian mixture model (GMM): In order to model a background which is dynamic texture(such as waves on the water or trees shaken by the wind), each pixel with a mixture of K Gaussians distributions is modeled.
+For each video frames, find the probability of input pixel value x from current frame at time t being a background pixel is represented by the following mixture of Gaussians
+A new pixel is checked against the exiting K Gaussian distributions, until a match is found.
+If none of K distributions match the current pixel value, the least probable distribution is replaced
+with a distribution with the current value as its mean value.
+If pixel values cannot match the background model distributions, they will be labeled “in motion”, otherwise background pixel.
